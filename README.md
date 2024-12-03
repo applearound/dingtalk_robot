@@ -12,9 +12,9 @@ This project is a DingTalk robot implemented using Python's aiohttp library.
 ```python
 import asyncio
 
-from dingtalk_robot import Robot
-from dingtalk_robot.request import RequestBody, TextBody
-from dingtalk_robot.response import ResponseBody
+from dtalk_robot import Robot
+from dtalk_robot.request import RequestBody, TextBody
+from dtalk_robot.response import ResponseBody
 
 async def send(request_body: RequestBody) -> ResponseBody:
     async with Robot(access_token="access_token", secret="secret") as robot:

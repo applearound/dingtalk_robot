@@ -2,7 +2,7 @@ import logging
 import unittest
 from typing import Self
 
-from dingtalk_robot.request import RequestBody, TextBody
+from dtalk_robot.request import RequestBody, TextBody
 
 log = logging.getLogger(__name__)
 

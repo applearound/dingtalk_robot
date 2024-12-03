@@ -1,7 +1,7 @@
 import unittest
 from typing import Self
 
-from dingtalk_robot import Robot
+from dtalk_robot import Robot
 
 
 class TestRobot(unittest.IsolatedAsyncioTestCase):
