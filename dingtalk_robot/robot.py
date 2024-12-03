@@ -13,9 +13,7 @@ from dingtalk_robot.response import ResponseBody
 
 
 class Robot:
-    """
-    DingTalk robot client. Support async context manager.
-    """
+    r"""DingTalk robot client. Support async context manager."""
 
     DINGTALK_ROBOT_SEND_URL: Final[str] = "https://oapi.dingtalk.com/robot/send"
 
@@ -26,8 +24,7 @@ class Robot:
 
     @staticmethod
     def dingtalk_robot_sign(timestamp: int, secret: str) -> str:
-        """
-        Generate DingTalk robot sign.
+        r"""Generate DingTalk robot sign.
 
         see https://open.dingtalk.com/document/orgapp/customize-robot-security-settings
 
@@ -50,8 +47,7 @@ class Robot:
     def build_dingtalk_robot_send_url(
         cls, access_token: str, secret: Optional[str] = None
     ) -> str:
-        """
-        Build DingTalk robot webhook url.
+        r"""Build DingTalk robot webhook url.
 
         You need to make sure that secret is None or not before calling this method.
 

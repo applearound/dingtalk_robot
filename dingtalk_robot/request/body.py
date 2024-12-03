@@ -14,8 +14,7 @@ from dingtalk_robot.request.entity import (
 
 @dataclass
 class RequestBody:
-    """
-    DingTalk robot request body.
+    r"""DingTalk robot request body.
 
     see https://open.dingtalk.com/document/orgapp/custom-robots-send-group-messages
     """

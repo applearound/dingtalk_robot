@@ -3,8 +3,7 @@ from dataclasses import dataclass, field
 
 @dataclass
 class ResponseBody:
-    """
-    DingTalk response body.
+    r"""DingTalk response body.
 
     see: https://open.dingtalk.com/document/orgapp/custom-robots-send-group-messages
     """
