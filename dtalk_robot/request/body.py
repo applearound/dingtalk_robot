@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
 from typing import Optional, Self
 
-from dingtalk_robot.request.constants import MsgType
-from dingtalk_robot.request.entity import (
+from .constants import MsgType
+from .entity import (
     ActionCardBody,
     AtBody,
     FeedCardBody,

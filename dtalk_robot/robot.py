@@ -8,8 +8,8 @@ from typing import Final, Optional, Self, Type
 
 import aiohttp
 
-from dingtalk_robot.request import RequestBody
-from dingtalk_robot.response import ResponseBody
+from .request import RequestBody
+from .response import ResponseBody
 
 
 class Robot:

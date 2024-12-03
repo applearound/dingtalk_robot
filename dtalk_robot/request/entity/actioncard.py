@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Self
 
-from dingtalk_robot.request.entity.btn import BtnBody
+from .btn import BtnBody
 
 
 @dataclass

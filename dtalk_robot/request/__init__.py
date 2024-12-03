@@ -11,9 +11,9 @@ __all__ = [
     "BtnBody",
 ]
 
-from dingtalk_robot.request.body import RequestBody
-from dingtalk_robot.request.constants import MsgType
-from dingtalk_robot.request.entity import (
+from .body import RequestBody
+from .constants import MsgType
+from .entity import (
     ActionCardBody,
     AtBody,
     BtnBody,
