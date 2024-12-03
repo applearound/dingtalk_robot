@@ -1,7 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
 
-class MsgType(Enum):
+class MsgType(StrEnum):
     TEXT = "text"
     LINK = "link"
     MARKDOWN = "markdown"

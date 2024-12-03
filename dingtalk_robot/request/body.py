@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Self
+from typing import Optional, Self
 
 from dingtalk_robot.request.constants import MsgType
 from dingtalk_robot.request.entity import (
@@ -14,6 +14,12 @@ from dingtalk_robot.request.entity import (
 
 @dataclass
 class RequestBody:
+    """
+    DingTalk robot request body.
+
+    see https://open.dingtalk.com/document/orgapp/custom-robots-send-group-messages
+    """
+
     msgtype: MsgType
     text: TextBody = field(default=None)
     at: AtBody = field(default=None)
@@ -23,34 +29,34 @@ class RequestBody:
     feed_card: FeedCardBody = field(default=None)
 
     @classmethod
-    def text_body(cls, msgtype: MsgType, text: TextBody, at: AtBody = None) -> Self:
-        return cls(msgtype=msgtype, text=text, at=at)
+    def text_message(cls, text: TextBody, at: Optional[AtBody] = None) -> Self:
+        return cls(msgtype=MsgType.TEXT, text=text, at=at)
 
     @classmethod
-    def link_body(cls, msgtype: MsgType, link: LinkBody) -> Self:
-        return cls(msgtype=msgtype, link=link)
+    def link_message(cls, link: LinkBody) -> Self:
+        return cls(msgtype=MsgType.LINK, link=link)
 
     @classmethod
-    def markdown_body(
-        cls, msgtype: MsgType, markdown: MarkdownBody, at: AtBody = None
+    def markdown_message(
+        cls, markdown: MarkdownBody, at: Optional[AtBody] = None
     ) -> Self:
-        return cls(msgtype=msgtype, markdown=markdown, at=at)
+        return cls(msgtype=MsgType.MARKDOWN, markdown=markdown, at=at)
 
     @classmethod
-    def action_card_body(cls, msgtype: MsgType, action_card: ActionCardBody) -> Self:
-        return cls(msgtype=msgtype, action_card=action_card)
+    def action_card_message(cls, action_card: ActionCardBody) -> Self:
+        return cls(msgtype=MsgType.ACTION_CARD, action_card=action_card)
 
     @classmethod
-    def feed_card_body(cls, msgtype: MsgType, feed_card: FeedCardBody) -> Self:
-        return cls(msgtype=msgtype, feed_card=feed_card)
+    def feed_card_message(cls, feed_card: FeedCardBody) -> Self:
+        return cls(msgtype=MsgType.FEED_CARD, feed_card=feed_card)
 
     def to_dict(self: Self) -> dict:
         return {
             "msgtype": self.msgtype.value,
-            "text": self.text.to_dict(),
-            "at": self.at.to_dict(),
-            "link": self.link.to_dict(),
-            "markdown": self.markdown.to_dict(),
-            "actionCard": self.action_card.to_dict(),
-            "feedCard": self.feed_card.to_dict(),
+            "text": self.text.to_dict() if self.text else None,
+            "at": self.at.to_dict() if self.at else None,
+            "link": self.link.to_dict() if self.link else None,
+            "markdown": self.markdown.to_dict() if self.markdown else None,
+            "actionCard": self.action_card.to_dict() if self.action_card else None,
+            "feedCard": self.feed_card.to_dict() if self.feed_card else None,
         }

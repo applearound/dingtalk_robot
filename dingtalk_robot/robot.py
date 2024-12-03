@@ -9,9 +9,14 @@ from typing import Final, Self, Type
 import aiohttp
 
 from dingtalk_robot.request import RequestBody
+from dingtalk_robot.response import ResponseBody
 
 
 class Robot:
+    """
+    DingTalk robot client. Support async context manager.
+    """
+
     DINGTALK_ROBOT_SEND_URL: Final[str] = "https://oapi.dingtalk.com/robot/send"
 
     def __init__(self: Self, access_token: str, secret: str) -> None:
@@ -21,6 +26,16 @@ class Robot:
 
     @staticmethod
     def dingtalk_robot_sign(timestamp: int, secret: str) -> str:
+        """
+        Generate DingTalk robot sign.
+
+        see https://open.dingtalk.com/document/orgapp/customize-robot-security-settings
+
+        :param timestamp: timestamp
+        :param secret: secret
+
+        :return: sign
+        """
         secret_enc = secret.encode("utf-8")
 
         string_to_sign = f"{timestamp}\n{secret}"
@@ -32,19 +47,20 @@ class Robot:
         return urllib.parse.quote_plus(base64.b64encode(hmac_code))
 
     @classmethod
-    def build_dingtalk_robot_send_url(
-        cls: Type["Robot"], access_token: str, secret: str
-    ) -> str:
+    def build_dingtalk_robot_send_url(cls, access_token: str, secret: str) -> str:
         timestamp = round(time.time() * 1000)
         _sign = cls.dingtalk_robot_sign(timestamp, secret)
 
         return f"{cls.DINGTALK_ROBOT_SEND_URL}?access_token={access_token}&timestamp={timestamp}&sign={_sign}"
 
-    async def send_message(self: Self, send_body: RequestBody) -> dict:
+    async def send_message(self: Self, send_body: RequestBody) -> ResponseBody:
         url = self.build_dingtalk_robot_send_url(self.__access_token, self.__secret)
 
-        async with self.__session.post(url, json=send_body.to_json()) as response:
-            return await response.json()
+        async with self.__session.post(url, json=send_body.to_dict()) as response:
+            response_json = await response.json()
+            return ResponseBody(
+                errmsg=response_json.get("errmsg"), errcode=response_json.get("errcode")
+            )
 
     async def close(self: Self) -> None:
         await self.__session.close()
