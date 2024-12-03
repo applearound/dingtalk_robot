@@ -4,7 +4,7 @@ import hmac
 import time
 import urllib.parse
 from types import TracebackType
-from typing import Final, Self, Type
+from typing import Final, Optional, Self, Type
 
 import aiohttp
 
@@ -47,7 +47,22 @@ class Robot:
         return urllib.parse.quote_plus(base64.b64encode(hmac_code))
 
     @classmethod
-    def build_dingtalk_robot_send_url(cls, access_token: str, secret: str) -> str:
+    def build_dingtalk_robot_send_url(
+        cls, access_token: str, secret: Optional[str] = None
+    ) -> str:
+        """
+        Build DingTalk robot webhook url.
+
+        You need to make sure that secret is None or not before calling this method.
+
+        :param access_token: access token
+        :param secret: secret
+
+        :return: webhook url
+        """
+        if secret is None or secret.strip() == "":
+            return f"{cls.DINGTALK_ROBOT_SEND_URL}?access_token={access_token}"
+
         timestamp = round(time.time() * 1000)
         _sign = cls.dingtalk_robot_sign(timestamp, secret)
 

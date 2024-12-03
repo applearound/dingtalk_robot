@@ -33,6 +33,10 @@ class RequestBody:
         return cls(msgtype=MsgType.TEXT, text=text, at=at)
 
     @classmethod
+    def text_message_str(cls, content: str, at: Optional[AtBody] = None) -> Self:
+        return cls(msgtype=MsgType.TEXT, text=TextBody(content=content), at=at)
+
+    @classmethod
     def link_message(cls, link: LinkBody) -> Self:
         return cls(msgtype=MsgType.LINK, link=link)
 
