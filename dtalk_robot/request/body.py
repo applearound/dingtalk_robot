@@ -20,12 +20,12 @@ class RequestBody:
     """
 
     msgtype: MsgType
-    text: TextBody = field(default=None)
-    at: AtBody = field(default=None)
-    link: LinkBody = field(default=None)
-    markdown: MarkdownBody = field(default=None)
-    action_card: ActionCardBody = field(default=None)
-    feed_card: FeedCardBody = field(default=None)
+    text: Optional[TextBody] = field(default=None)
+    at: Optional[AtBody] = field(default=None)
+    link: Optional[LinkBody] = field(default=None)
+    markdown: Optional[MarkdownBody] = field(default=None)
+    action_card: Optional[ActionCardBody] = field(default=None)
+    feed_card: Optional[FeedCardBody] = field(default=None)
 
     @classmethod
     def text_message(cls, text: TextBody, at: Optional[AtBody] = None) -> Self:

@@ -1,17 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Self
+from typing import Optional, Self
 
 from .btn import BtnBody
 
 
 @dataclass
 class ActionCardBody:
-    hide_avatar: str = field(default=None)
-    btn_orientation: str = field(default=None)
-    single_url: str = field(default=None)
-    single_title: str = field(default=None)
-    text: str = field(default=None)
-    title: str = field(default=None)
+    hide_avatar: Optional[str] = field(default=None)
+    btn_orientation: Optional[str] = field(default=None)
+    single_url: Optional[str] = field(default=None)
+    single_title: Optional[str] = field(default=None)
+    text: Optional[str] = field(default=None)
+    title: Optional[str] = field(default=None)
     btns: list[BtnBody] = field(default_factory=list)
 
     def add_btn(self: Self, btn: BtnBody) -> Self:

@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Self
+from typing import Optional, Self
 
 
 @dataclass
 class MarkdownBody:
-    title: str = field(default=None)
-    text: str = field(default=None)
+    title: Optional[str] = field(default=None)
+    text: Optional[str] = field(default=None)
 
     def to_dict(self: Self) -> dict:
         return {"title": self.title, "text": self.text}

@@ -1,10 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Self
+from typing import Optional, Self
 
 
 @dataclass
 class AtBody:
-    is_at_all: bool = field(default=None)
+    is_at_all: Optional[bool] = field(default=None)
     at_mobiles: list[str] = field(default_factory=list)
     at_user_ids: list[str] = field(default_factory=list)
 
